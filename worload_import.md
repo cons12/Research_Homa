@@ -58,3 +58,7 @@ changed files:
 
 running:
     ../homatransport -u Cmdenv -c WorkloadHadoop --r_alpha=100 --r_mode=homa -r 6 -n ..:../../simulations:../../../inet/examples:../../../inet/src -l ../../../inet/src/INET homaTransportConfig.ini
+    
+Stauts checkpoint:
+    both homa and omnet compile, and global variable read in
+    TODO: couldn't parse the variable from cComponent, look into the par function
