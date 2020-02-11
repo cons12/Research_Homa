@@ -48,6 +48,13 @@ omnet/src/envir/startup.cc:
     - line 103: check for command line args (need to add alpha/mode option here) TODO
 
 changed files:
-    cmdenv.cc
-    startup.cc
-    homatransport.cc
+    omnet++:
+        cmdenv.cc
+        startup.cc
+    homa:
+        homatransport.cc
+        HomaConfigDepot.cc
+        HomaConfigDepot.h
+
+running:
+    ../homatransport -u Cmdenv -c WorkloadHadoop --r_alpha=100 --r_mode=homa -r 6 -n ..:../../simulations:../../../inet/examples:../../../inet/src -l ../../../inet/src/INET homaTransportConfig.ini
