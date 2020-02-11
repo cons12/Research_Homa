@@ -35,3 +35,15 @@ configurations all from ownerTransport
 cComponent* ownerTransport
 Thoughts: 1) Find the cComponent class constructor and see if changes can be made
           2) Directly adding a new parameter in the ownerTransport 
+          
+src/cmdenv.cc 
+    R-alpha-val
+    R-mode
+    - setup() will overide -c/-n 
+    
+opt1: go to setup and check the environment variable
+opt2: add global variables here
+
+omnet/src/envir/startup.cc:
+    - line 103: check for command line args (need to add alpha/mode option here) TODO
+    
