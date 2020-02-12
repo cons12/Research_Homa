@@ -49,8 +49,10 @@ omnet/src/envir/startup.cc:
 
 changed files:
     omnet++:
-        cmdenv.cc
+        cmdenv/cmdenv.cc
         startup.cc
+        sim/ccomponent.cc
+        include/ccomponent.h
     homa:
         homatransport.cc
         HomaConfigDepot.cc
