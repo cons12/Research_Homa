@@ -34,9 +34,10 @@ NAMESPACE_BEGIN
 
 
 Register_PerObjectConfigOption(CFGID_PARAM_RECORD_AS_SCALAR, "param-record-as-scalar", KIND_PARAMETER, CFG_BOOL, "false", "Applicable to module parameters: specifies whether the module parameter should be recorded into the output scalar file. Set it for parameters whose value you'll need for result analysis.");
-
+/*changes made for homa start*/
 Register_GlobalConfigOption(CFGID_OPTION_R_ALPHA, "r_alpha", CFG_STRING, nullptr, "experiment alpha value");
 Register_GlobalConfigOption(CFGID_OPTION_R_MODE, "r_mode", CFG_STRING, nullptr, "experiment mode");
+/*changes made for homa end*/
 
 #define SIGNALMASK_UNFILLED (~(uint64)0)
 
@@ -245,7 +246,7 @@ void cComponent::bubble(const char *text)
     ev.bubble(this, text);
 }
 
-/*research*/
+/*research start*/
 std::string cComponent::homa_getAlpha()
 {
     return ev.getConfig()->getAsString(CFGID_OPTION_R_ALPHA);
@@ -255,7 +256,7 @@ std::string cComponent::homa_getMode()
 {
     return ev.getConfig()->getAsString(CFGID_OPTION_R_MODE);
 }
-
+/*end*/
 void cComponent::recordParametersAsScalars()
 {
     int n = getNumParams();

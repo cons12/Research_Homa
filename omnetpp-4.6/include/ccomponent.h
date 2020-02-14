@@ -139,9 +139,10 @@ class SIM_API cComponent : public cDefaultList //implies noncopyable
     // internal: reallocates paramv (size must be >= numparams)
     void reallocParamv(int size);
 
-    // research: get command-line parameters
+    // research start: get command-line parameters
     std::string homa_getAlpha();
-    std::string homa_getMode();
+    std::string homa_getMode(); 
+    // research end
 
     // internal: save parameters marked with "save-as-scalars=true"
     virtual void recordParametersAsScalars();
