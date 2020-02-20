@@ -2458,13 +2458,20 @@ HomaTransport::ReceiveScheduler::SchedSenders::handleBwUtilTimerEvent(
 
 uint16_t
 HomaTransport::ReceiveScheduler::SchedSenders::getGrantPrioFromRawPrio(std::string mode, float rawPrio){
+    uint16_t m_nonBlind = (mode == "blind") ? 0: 1;
+    std::vector<double> limits = getPrioLimits(m_nonBlind);
 
+    uint16_t i = 7;
+    while (i >=0 && rawPrio < limits[i]){
+        i--;
+    }
     
+    return (i==-1) ? 0: i;   
 }	
 
 
 std::vector<double> 
-HomaTransport::ReceiveScheduler::SchedSenders::getPrioLimits(){
+HomaTransport::ReceiveScheduler::SchedSenders::getPrioLimits(uint16_t m_nonBlind){
 	// copy all the limits
 	// compute grant prio by checking which bin the rawPrio falls in
 	// return grantPrio
@@ -2477,8 +2484,8 @@ HomaTransport::ReceiveScheduler::SchedSenders::getPrioLimits(){
     // Note: Do not "overfit" the bucket boundaries, else varying alpha is hard to demonstrate
 		switch (m_profile) {
 			case 1: // W1 (alpha = 10)
-				if (m_nonBlind) {
-					limits = {1.64e-08, 3.15e-19, 6.08e-30, 1.17e-40, 2.26e-51, 4.37e-62, 8.42e-72, 1.62e-83}; // generalized
+				if (m_nonBlind) { 
+					limits = {1.64e-08, 3.15e-19, 6.08e-30, 1.17e-40, 2.26e-51, 4.37e-62, 8.42e-72}; // generalized 1.62e-83 (the last one removed)
 					//limits = {5.10708e-41, 3.12373e-41, 2.67044e-41, 2.19076e-41, 1.87042e-41, 1.59852e-41, 1.37976e-41, 1.18287e-41}; // overfitted
 					//limits = {3.456e-39, 2.574e-41, 1.957e-41, 1.541e-41, 1.224e-41, 1.56267e-44, 1.56257e-44, 1.56255e-44};
 				} else {
