@@ -35,7 +35,6 @@ PATH: /sbin
 PATH: /bin
 PATH: /usr/games
 PATH: /usr/local/games
-PATH: /users/mkunal/omnetpp-4.6/bin
 
 
 ## ----------- ##
@@ -187,7 +186,7 @@ configure:3633: checking if shared libs need -fPIC
 configure:3658: result: yes
 configure:3710: checking for dlopen with CFLAGS="" LIBS=""
 configure:3724: g++ -o conftest    conftest.cpp  >&5
-/tmp/ccnxuqv1.o: In function `main':
+/tmp/ccCjAxvm.o: In function `main':
 conftest.cpp:(.text+0x11): undefined reference to `dlopen'
 collect2: error: ld returned 1 exit status
 configure:3724: $? = 1
@@ -7475,7 +7474,7 @@ configure:4415: $? = 0
 configure:4416: result: yes
 configure:4514: checking for dlopen with CFLAGS="" LIBS=""
 configure:4528: g++ -o conftest    -Wl,--export-dynamic  -Wl,-rpath,$(OMNETPP_LIB_DIR) -Wl,-rpath,. conftest.cpp  >&5
-/tmp/ccO2hgMc.o: In function `main':
+/tmp/ccHffpFw.o: In function `main':
 conftest.cpp:(.text+0x11): undefined reference to `dlopen'
 collect2: error: ld returned 1 exit status
 configure:4528: $? = 1
@@ -7528,246 +7527,14 @@ configure: failed program was:
 |   return 0;
 | }
 configure:4611: result: no
-configure:4686: checking for Tcl/Tk 8.6 with CFLAGS=" -O2 -DNDEBUG=1 -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT " LIBS="-ltk8.6 -ltcl8.6"
-configure:4700: g++ -o conftest  -O2 -DNDEBUG=1 -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT    -Wl,--export-dynamic  -Wl,-rpath,$(OMNETPP_LIB_DIR) -Wl,-rpath,. conftest.cpp -ltk8.6 -ltcl8.6 >&5
-conftest.cpp:10:10: fatal error: tk.h: No such file or directory
- #include <tk.h>
-          ^~~~~~
-compilation terminated.
-configure:4700: $? = 1
-configure: failed program was:
-| /* confdefs.h */
-| #define PACKAGE_NAME ""
-| #define PACKAGE_TARNAME ""
-| #define PACKAGE_VERSION ""
-| #define PACKAGE_STRING ""
-| #define PACKAGE_BUGREPORT ""
-| #define PACKAGE_URL ""
-| #define HAVE_SWAPCONTEXT 1
-| /* end confdefs.h.  */
-| #include <tk.h>
-| int
-| main ()
-| {
-| Tk_MainLoop();
-|   ;
-|   return 0;
-| }
-configure:4704: result: no
-configure:4721: checking for Tcl/Tk 8.5 with CFLAGS=" -O2 -DNDEBUG=1 -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT " LIBS="-ltk8.5 -ltcl8.5"
-configure:4735: g++ -o conftest  -O2 -DNDEBUG=1 -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT    -Wl,--export-dynamic  -Wl,-rpath,$(OMNETPP_LIB_DIR) -Wl,-rpath,. conftest.cpp -ltk8.5 -ltcl8.5 >&5
-conftest.cpp:10:10: fatal error: tk.h: No such file or directory
- #include <tk.h>
-          ^~~~~~
-compilation terminated.
-configure:4735: $? = 1
-configure: failed program was:
-| /* confdefs.h */
-| #define PACKAGE_NAME ""
-| #define PACKAGE_TARNAME ""
-| #define PACKAGE_VERSION ""
-| #define PACKAGE_STRING ""
-| #define PACKAGE_BUGREPORT ""
-| #define PACKAGE_URL ""
-| #define HAVE_SWAPCONTEXT 1
-| /* end confdefs.h.  */
-| #include <tk.h>
-| int
-| main ()
-| {
-| Tk_MainLoop();
-|   ;
-|   return 0;
-| }
-configure:4739: result: no
-configure:4757: checking how to run the C++ preprocessor
-configure:4784: g++ -E  conftest.cpp
-configure:4784: $? = 0
-configure:4798: g++ -E  conftest.cpp
-conftest.cpp:10:10: fatal error: ac_nonexistent.h: No such file or directory
- #include <ac_nonexistent.h>
-          ^~~~~~~~~~~~~~~~~~
-compilation terminated.
-configure:4798: $? = 1
-configure: failed program was:
-| /* confdefs.h */
-| #define PACKAGE_NAME ""
-| #define PACKAGE_TARNAME ""
-| #define PACKAGE_VERSION ""
-| #define PACKAGE_STRING ""
-| #define PACKAGE_BUGREPORT ""
-| #define PACKAGE_URL ""
-| #define HAVE_SWAPCONTEXT 1
-| /* end confdefs.h.  */
-| #include <ac_nonexistent.h>
-configure:4823: result: g++ -E
-configure:4843: g++ -E  conftest.cpp
-configure:4843: $? = 0
-configure:4857: g++ -E  conftest.cpp
-conftest.cpp:10:10: fatal error: ac_nonexistent.h: No such file or directory
- #include <ac_nonexistent.h>
-          ^~~~~~~~~~~~~~~~~~
-compilation terminated.
-configure:4857: $? = 1
-configure: failed program was:
-| /* confdefs.h */
-| #define PACKAGE_NAME ""
-| #define PACKAGE_TARNAME ""
-| #define PACKAGE_VERSION ""
-| #define PACKAGE_STRING ""
-| #define PACKAGE_BUGREPORT ""
-| #define PACKAGE_URL ""
-| #define HAVE_SWAPCONTEXT 1
-| /* end confdefs.h.  */
-| #include <ac_nonexistent.h>
-configure:4886: checking for X
-configure:4994: g++ -E  conftest.cpp
-conftest.cpp:10:10: fatal error: X11/Xlib.h: No such file or directory
- #include <X11/Xlib.h>
-          ^~~~~~~~~~~~
-compilation terminated.
-configure:4994: $? = 1
-configure: failed program was:
-| /* confdefs.h */
-| #define PACKAGE_NAME ""
-| #define PACKAGE_TARNAME ""
-| #define PACKAGE_VERSION ""
-| #define PACKAGE_STRING ""
-| #define PACKAGE_BUGREPORT ""
-| #define PACKAGE_URL ""
-| #define HAVE_SWAPCONTEXT 1
-| /* end confdefs.h.  */
-| #include <X11/Xlib.h>
-configure:5025: g++ -o conftest  -std=c++11   -Wl,--export-dynamic  -Wl,-rpath,$(OMNETPP_LIB_DIR) -Wl,-rpath,. conftest.cpp -lX11  >&5
-conftest.cpp:10:10: fatal error: X11/Xlib.h: No such file or directory
- #include <X11/Xlib.h>
-          ^~~~~~~~~~~~
-compilation terminated.
-configure:5025: $? = 1
-configure: failed program was:
-| /* confdefs.h */
-| #define PACKAGE_NAME ""
-| #define PACKAGE_TARNAME ""
-| #define PACKAGE_VERSION ""
-| #define PACKAGE_STRING ""
-| #define PACKAGE_BUGREPORT ""
-| #define PACKAGE_URL ""
-| #define HAVE_SWAPCONTEXT 1
-| /* end confdefs.h.  */
-| #include <X11/Xlib.h>
-| int
-| main ()
-| {
-| XrmInitialize ()
-|   ;
-|   return 0;
-| }
-configure:5064: result: no
-configure:5099: checking for Tcl/Tk 8.6 with CFLAGS=" -O2 -DNDEBUG=1 -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT  " LIBS=" -ltk86 -ltcl86"
-configure:5113: g++ -o conftest  -O2 -DNDEBUG=1 -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT     -Wl,--export-dynamic  -Wl,-rpath,$(OMNETPP_LIB_DIR) -Wl,-rpath,. conftest.cpp  -ltk86 -ltcl86 >&5
-conftest.cpp:10:10: fatal error: tk.h: No such file or directory
- #include <tk.h>
-          ^~~~~~
-compilation terminated.
-configure:5113: $? = 1
-configure: failed program was:
-| /* confdefs.h */
-| #define PACKAGE_NAME ""
-| #define PACKAGE_TARNAME ""
-| #define PACKAGE_VERSION ""
-| #define PACKAGE_STRING ""
-| #define PACKAGE_BUGREPORT ""
-| #define PACKAGE_URL ""
-| #define HAVE_SWAPCONTEXT 1
-| /* end confdefs.h.  */
-| #include <tk.h>
-| int
-| main ()
-| {
-| Tk_MainLoop();
-|   ;
-|   return 0;
-| }
-configure:5117: result: no
-configure:5135: checking for Tcl/Tk 8.6 with CFLAGS=" -O2 -DNDEBUG=1 -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT  " LIBS=" -ltk8.6 -ltcl8.6"
-configure:5149: g++ -o conftest  -O2 -DNDEBUG=1 -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT     -Wl,--export-dynamic  -Wl,-rpath,$(OMNETPP_LIB_DIR) -Wl,-rpath,. conftest.cpp  -ltk8.6 -ltcl8.6 >&5
-conftest.cpp:10:10: fatal error: tk.h: No such file or directory
- #include <tk.h>
-          ^~~~~~
-compilation terminated.
-configure:5149: $? = 1
-configure: failed program was:
-| /* confdefs.h */
-| #define PACKAGE_NAME ""
-| #define PACKAGE_TARNAME ""
-| #define PACKAGE_VERSION ""
-| #define PACKAGE_STRING ""
-| #define PACKAGE_BUGREPORT ""
-| #define PACKAGE_URL ""
-| #define HAVE_SWAPCONTEXT 1
-| /* end confdefs.h.  */
-| #include <tk.h>
-| int
-| main ()
-| {
-| Tk_MainLoop();
-|   ;
-|   return 0;
-| }
-configure:5153: result: no
-configure:5208: checking for Tcl/Tk 8.5 with CFLAGS=" -O2 -DNDEBUG=1 -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT  " LIBS=" -ltk85 -ltcl85"
-configure:5222: g++ -o conftest  -O2 -DNDEBUG=1 -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT     -Wl,--export-dynamic  -Wl,-rpath,$(OMNETPP_LIB_DIR) -Wl,-rpath,. conftest.cpp  -ltk85 -ltcl85 >&5
-conftest.cpp:10:10: fatal error: tk.h: No such file or directory
- #include <tk.h>
-          ^~~~~~
-compilation terminated.
-configure:5222: $? = 1
-configure: failed program was:
-| /* confdefs.h */
-| #define PACKAGE_NAME ""
-| #define PACKAGE_TARNAME ""
-| #define PACKAGE_VERSION ""
-| #define PACKAGE_STRING ""
-| #define PACKAGE_BUGREPORT ""
-| #define PACKAGE_URL ""
-| #define HAVE_SWAPCONTEXT 1
-| /* end confdefs.h.  */
-| #include <tk.h>
-| int
-| main ()
-| {
-| Tk_MainLoop();
-|   ;
-|   return 0;
-| }
-configure:5226: result: no
-configure:5244: checking for Tcl/Tk 8.5 with CFLAGS=" -O2 -DNDEBUG=1 -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT  " LIBS=" -ltk8.5 -ltcl8.5"
-configure:5258: g++ -o conftest  -O2 -DNDEBUG=1 -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT     -Wl,--export-dynamic  -Wl,-rpath,$(OMNETPP_LIB_DIR) -Wl,-rpath,. conftest.cpp  -ltk8.5 -ltcl8.5 >&5
-conftest.cpp:10:10: fatal error: tk.h: No such file or directory
- #include <tk.h>
-          ^~~~~~
-compilation terminated.
-configure:5258: $? = 1
-configure: failed program was:
-| /* confdefs.h */
-| #define PACKAGE_NAME ""
-| #define PACKAGE_TARNAME ""
-| #define PACKAGE_VERSION ""
-| #define PACKAGE_STRING ""
-| #define PACKAGE_BUGREPORT ""
-| #define PACKAGE_URL ""
-| #define HAVE_SWAPCONTEXT 1
-| /* end confdefs.h.  */
-| #include <tk.h>
-| int
-| main ()
-| {
-| Tk_MainLoop();
-|   ;
-|   return 0;
-| }
-configure:5262: result: no
-configure:5316: error: Cannot build Tcl/Tk apps, probably due to misconfigured or missing X11 headers or libs. Check config.log for more info!
+configure:4686: checking for Tcl/Tk 8.6 with CFLAGS=" -O2 -DNDEBUG=1 -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT -I/usr/include/tcl8.6" LIBS="-ltk8.6 -ltcl8.6"
+configure:4700: g++ -o conftest  -O2 -DNDEBUG=1 -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT -I/usr/include/tcl8.6   -Wl,--export-dynamic  -Wl,-rpath,$(OMNETPP_LIB_DIR) -Wl,-rpath,. conftest.cpp -ltk8.6 -ltcl8.6 >&5
+configure:4700: $? = 0
+configure:4701: result: yes
+configure:5328: checking for wish
+configure:5344: found /usr/bin/wish
+configure:5355: result: wish
+configure:5371: error: Cannot run wish (wish command "puts OK; exit" failed): maybe you are not running X or DISPLAY environment variable not set?
 
 ## ---------------- ##
 ## Cache variables. ##
@@ -7811,15 +7578,14 @@ ac_cv_env_host_alias_value=
 ac_cv_env_target_alias_set=
 ac_cv_env_target_alias_value=
 ac_cv_func_swapcontext=yes
-ac_cv_have_x=have_x=no
 ac_cv_host=x86_64-unknown-linux-gnu
 ac_cv_lib_lex='none needed'
 ac_cv_objext=o
-ac_cv_prog_CXXCPP='g++ -E'
 ac_cv_prog_LEX=flex
 ac_cv_prog_MAKE=make
 ac_cv_prog_PERL=perl
 ac_cv_prog_SWIG='not found'
+ac_cv_prog_WISH=wish
 ac_cv_prog_YACC='bison -y'
 ac_cv_prog_ac_ct_CC=gcc
 ac_cv_prog_ac_ct_CXX=g++
@@ -7849,7 +7615,7 @@ CFLAGS_DEBUG=' -g -Wall -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT'
 CFLAGS_RELEASE=' -O2 -DNDEBUG=1 -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT'
 CPPFLAGS=''
 CXX='g++'
-CXXCPP='g++ -E'
+CXXCPP=''
 CXXFLAGS=' -std=c++11'
 DEFS=''
 DLLTOOL='dlltool'
@@ -7890,23 +7656,23 @@ MYPWD='pwd'
 NEDTOOL='nedtool'
 NO_TCL=''
 OBJEXT='o'
-OMNETPP_BIN_DIR='/users/mkunal/omnetpp-4.6/bin'
+OMNETPP_BIN_DIR='/users/mkunal/Research_Homa/omnetpp-4.6/bin'
 OMNETPP_BUILDID='141202-f785492'
-OMNETPP_DOC_DIR='/users/mkunal/omnetpp-4.6/doc'
+OMNETPP_DOC_DIR='/users/mkunal/Research_Homa/omnetpp-4.6/doc'
 OMNETPP_EDITION='Academic Public License -- NOT FOR COMMERCIAL USE'
-OMNETPP_IMAGE_PATH='./bitmaps;./images;/users/mkunal/omnetpp-4.6/images'
-OMNETPP_INCL_DIR='/users/mkunal/omnetpp-4.6/include'
-OMNETPP_LIB_DIR='/users/mkunal/omnetpp-4.6/lib'
-OMNETPP_OUT_DIR='/users/mkunal/omnetpp-4.6/out'
+OMNETPP_IMAGE_PATH='./bitmaps;./images;/users/mkunal/Research_Homa/omnetpp-4.6/images'
+OMNETPP_INCL_DIR='/users/mkunal/Research_Homa/omnetpp-4.6/include'
+OMNETPP_LIB_DIR='/users/mkunal/Research_Homa/omnetpp-4.6/lib'
+OMNETPP_OUT_DIR='/users/mkunal/Research_Homa/omnetpp-4.6/out'
 OMNETPP_PRODUCT='OMNeT++'
 OMNETPP_RELEASE='omnetpp-4.6'
-OMNETPP_ROOT='/users/mkunal/omnetpp-4.6'
-OMNETPP_SAMPLES_DIR='/users/mkunal/omnetpp-4.6/samples'
-OMNETPP_SRC_DIR='/users/mkunal/omnetpp-4.6/src'
-OMNETPP_TEST_DIR='/users/mkunal/omnetpp-4.6/test'
-OMNETPP_TKENV_DIR='/users/mkunal/omnetpp-4.6/src/tkenv'
-OMNETPP_UI_DIR='/users/mkunal/omnetpp-4.6/ui'
-OMNETPP_UTILS_DIR='/users/mkunal/omnetpp-4.6/src/utils'
+OMNETPP_ROOT='/users/mkunal/Research_Homa/omnetpp-4.6'
+OMNETPP_SAMPLES_DIR='/users/mkunal/Research_Homa/omnetpp-4.6/samples'
+OMNETPP_SRC_DIR='/users/mkunal/Research_Homa/omnetpp-4.6/src'
+OMNETPP_TEST_DIR='/users/mkunal/Research_Homa/omnetpp-4.6/test'
+OMNETPP_TKENV_DIR='/users/mkunal/Research_Homa/omnetpp-4.6/src/tkenv'
+OMNETPP_UI_DIR='/users/mkunal/Research_Homa/omnetpp-4.6/ui'
+OMNETPP_UTILS_DIR='/users/mkunal/Research_Homa/omnetpp-4.6/src/utils'
 OMNETPP_VERSION='4.6'
 PACKAGE_BUGREPORT=''
 PACKAGE_NAME=''
@@ -7935,12 +7701,12 @@ SWIG='not found'
 SYSTEMC='no'
 SYS_LIBS='-ldl -lstdc++ '
 TKENV_IF_POSSIBLE=''
-TK_CFLAGS=''
-TK_LIBS=''
+TK_CFLAGS='-I/usr/include/tcl8.6'
+TK_LIBS='-ltk8.6 -ltcl8.6'
 TOOLCHAIN_NAME='gcc'
 WHOLE_ARCHIVE_OFF='-Wl,--no-whole-archive'
 WHOLE_ARCHIVE_ON='-Wl,--whole-archive'
-WISH=''
+WISH='wish'
 WITH_NETBUILDER='yes'
 WITH_PARSIM='yes'
 XMKMF=''

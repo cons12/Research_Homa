@@ -609,7 +609,7 @@ class HomaTransport : public cSimpleModule
 
 	    //research
 	    std::vector<double> getPrioLimits(uint16_t m_nonBlind);
-            uint16_t getGrantPrioFromRawPrio(std::string mode, float rawPrio);
+            uint16_t getGrantPrioFromRawPrio(std::string mode, double rawPrio);
 	    
 	    void handleBwUtilTimerEvent(cMessage* timer);
             void handlePktArrivalEvent(SchedState& old, SchedState& cur);

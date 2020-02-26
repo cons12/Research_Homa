@@ -2457,7 +2457,7 @@ HomaTransport::ReceiveScheduler::SchedSenders::handleBwUtilTimerEvent(
 }
 
 uint16_t
-HomaTransport::ReceiveScheduler::SchedSenders::getGrantPrioFromRawPrio(std::string mode, float rawPrio){
+HomaTransport::ReceiveScheduler::SchedSenders::getGrantPrioFromRawPrio(std::string mode, double rawPrio){
     uint16_t m_nonBlind = (mode == "blind") ? 0: 1;
     std::vector<double> limits = getPrioLimits(m_nonBlind);
 
@@ -2483,10 +2483,26 @@ HomaTransport::ReceiveScheduler::SchedSenders::getPrioLimits(uint16_t m_nonBlind
 	// compute grant prio by checking which bin the rawPrio falls in
 	// return grantPrio
 	std::vector<double> limits;
-    
-	// Note: set m_profile = 1 for primary testing 
 	int m_profile = 1; 
+	std::string workloadType = homaConfig->workloadType;
+	
+	if ( workloadType == "FacebookKeyValue_Sampled"){
+		m_profile = 1;
+	}else if ( workloadType == "Google_SearchRPC"){
+		m_profile = 2;
+	}else if ( workloadType == "Google_AllRPC"){
+		m_profile = 3;
+	}else if ( workloadType == "Facebook_HadoopDist_All"){
+		m_profile = 4;
+	}else if ( workloadType == "DCTCP_MsgSizeDist"){
+		m_profile = 5;
+	}else{
+		std::cout << m_profile << std::endl;
+		std::cout << "invalid profile specified." << "\n";
 
+	}
+	
+	std::cout << "[workload type] " << workloadType << " [m_profile] " << m_profile << endl;
 
 	// Note: Do not "overfit" the bucket boundaries, else varying alpha is hard to demonstrate
 	switch (m_profile) {
@@ -2535,19 +2551,7 @@ HomaTransport::ReceiveScheduler::SchedSenders::getPrioLimits(uint16_t m_nonBlind
 			} else {
 				limits = {1.2e-21, 2.7e-27, 6e-33, 1.3e-38, 3e-44, 6.5e-50, 1.4e-55}; // 3.2e-61
 			}
-			break;
-		case 6: // Incast
-			if (m_nonBlind) {
-				limits = {7.0772E-65, 1.2458E-65, 2.1929E-66, 3.8601E-67, 6.7949E-68, 1.1961E-68, 2.1054E-69}; // 3.7061E-70
-			} else {
-				//limits = {2.6e-21, 1.2e-26, 5.3e-32, 2.4e-37, 1.1e-42, 4.9e-48, 2.2e-53, 1e-58};
-				limits = {3.6073E-20, 5.2077E-24, 7.5181E-28, 1.0854E-31, 1.5669E-35, 2.2620E-39, 3.2656E-43}; // 4.7144E-47}
-			}
-			break;
-		case 7: // background flows
-			limits = {1.2e-21, 2.7e-27, 6e-33, 1.3e-38, 3e-44, 6.5e-50, 1.4e-55}; //3.2e-61
-			break;
-		
+			break;		
 		default:
 			std::cout << m_profile << std::endl;
 			std::cout << "invalid profile specified." << "\n";
@@ -2556,7 +2560,17 @@ HomaTransport::ReceiveScheduler::SchedSenders::getPrioLimits(uint16_t m_nonBlind
 	for (int i=0; i<8; i++) {
 		m_prioLimits[i] = limits[i];
 	}*/
-	return limits; 
+	
+	//return limits; 
+	int l_size = static_cast<int>(limits.size());
+	for(int i=0; i < l_size; i++){
+   		limits[i] = log10(limits[i]);
+	}
+	
+	//for(std::vector<double>::iterator it = limits.begin(); it != limits.end(); ++it) {
+    		//it = log10(it);
+	//}
+	return limits;
 }
 
 uint16_t
@@ -2567,10 +2581,6 @@ HomaTransport::ReceiveScheduler::SchedSenders::getPrioForMesg(SchedState& st)
 
     int grantPrio;    
     InboundMessage* mesg = st.s -> incompleteMesgs[st.msgId]; 
-    
-    if(mesg == NULL){
-            return 0;
-    } 
     
     /*
     //Print out all PBS required elements 
@@ -2594,7 +2604,7 @@ HomaTransport::ReceiveScheduler::SchedSenders::getPrioForMesg(SchedState& st)
 	    
     }
     */
-    if (homaConfig->r_mode == "homa") {    
+    if (mesg == NULL || homaConfig->r_mode == "homa") {    
     	grantPrio =
         	st.sInd + homaConfig->allPrio - homaConfig->adaptiveSchedPrioLevels;
     	grantPrio = std::min(homaConfig->allPrio - 1, grantPrio);
@@ -2606,14 +2616,13 @@ HomaTransport::ReceiveScheduler::SchedSenders::getPrioForMesg(SchedState& st)
     } else if (homaConfig->r_mode == "blind") {
     	// age of flow should be in nanoseconds
 	// use alpha = 2 for the first run
-        uint32_t r_bytesSent = mesg -> msgSize - mesg -> bytesToReceive;
-	//std::cout<<"r_bytesSent: "<<r_bytesSent<<"\n"; 
-
+        uint32_t r_bytesSent = mesg -> msgSize - mesg -> bytesToReceive;	
         //simtime_t r_ageOfFlow = (simTime() - mesg -> reqArrivalTime) * (0.000001);
         simtime_t r_ageOfFlow = (simTime() - mesg -> msgCreationTime) * (0.000001);
 	//std::cout<<"r_ageOfFlow: "<<r_ageOfFlow<<"\n"; 
 	
-	float rawPrio = r_ageOfFlow.dbl() / pow(r_bytesSent, homaConfig->r_alpha); 
+	//float rawPrio = r_ageOfFlow.dbl() / pow(r_bytesSent, homaConfig->r_alpha); 
+	double rawPrio = log10(r_ageOfFlow.dbl()) / (homaConfig->r_alpha * log10(r_bytesSent));
 	//std::cout<<"rawPrio: "<<rawPrio<<"\n"; 
 	
         grantPrio= getGrantPrioFromRawPrio(homaConfig->r_mode, rawPrio); 
@@ -2623,9 +2632,11 @@ HomaTransport::ReceiveScheduler::SchedSenders::getPrioForMesg(SchedState& st)
     } else if (homaConfig->r_mode == "aware") {
         uint32_t r_bytesRemaining = mesg -> bytesToReceive;
         simtime_t r_ageOfFlow = (simTime() - mesg -> reqArrivalTime) * (0.000001);
-	float rawPrio = r_ageOfFlow.dbl() / pow(r_bytesRemaining, homaConfig->r_alpha); 
-	return getGrantPrioFromRawPrio(homaConfig->r_mode, rawPrio);
+	double rawPrio = log10(r_ageOfFlow.dbl()) / (homaConfig->r_alpha * log10(r_bytesRemaining));
+	grantPrio= getGrantPrioFromRawPrio(homaConfig->r_mode, rawPrio);
+	return grantPrio;
     }
+
 
 
 }
