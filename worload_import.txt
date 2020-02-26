@@ -64,3 +64,11 @@ running:
 Stauts checkpoint:
     both homa and omnet compile, and global variable read in
     TODO: couldn't parse the variable from cComponent, look into the par function
+
+Result directory:
+    /homatransport/src/dcntopo/results/
+
+Config file:
+     homaTransportConfig.ini
+     (result dir is specified in the config file)
+     
