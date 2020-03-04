@@ -72,3 +72,12 @@ Config file:
      homaTransportConfig.ini
      (result dir is specified in the config file)
      
+
+handlePktArrivalEvent -> getPrio
+
+problems:
+1. location of the file to receive -> in the dcntopo result_flow
+2. file name  -> flow profile name + alpha number + creation time 
+3. where to put the creation and close of the new file -> constructor and destructor of homatransport
+     - 
+     
