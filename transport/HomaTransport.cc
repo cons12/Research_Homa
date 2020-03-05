@@ -1787,19 +1787,8 @@ HomaTransport::ReceiveScheduler::SenderState::handleInboundPkt(HomaPkt* rxPkt)
 	// 2. write the flow size (bytes) and flow completion time (nano sec) to file
 	// 3. close the file somewhere else 
 	 
-	simtime_t r_ageOfFlow = (simTime() - inboundMesg -> msgCreationTime) * (0.000001);
-
-
-	//age of flow precision
-	/*
-	std::stringstream ss;
-	ss << std::setprecision(std::numeric_limits<int>::max());
-	ss << r_ageOfFlow.dbl();
-	*/
-
-        //simtime_t r_ageOfFlow = (simTime() - inboundMesg -> msgCreationTime) * (0.000001);
-	//std::cout << "simtime" << (simTime() - inboundMesg -> reqArrivalTime).dbl() << "\n";
-	//std::cout << "simtime nano" << r_ageOfFlow.dbl() << "\n";
+	simtime_t r_ageOfFlow = (simTime() - inboundMesg -> msgCreationTime) * (0.001);
+	
         uint32_t r_flowSize = inboundMesg -> msgSize;
 	std::string workloadTypye = homaConfig->workloadType;
 	std::string r_mode = homaConfig->r_mode;
@@ -1817,18 +1806,6 @@ HomaTransport::ReceiveScheduler::SenderState::handleInboundPkt(HomaPkt* rxPkt)
 	flow_result.open(flow_fileName.c_str(), std::ios_base::app);
 	flow_result << r_flowSize << " " << r_ageOfFlow.dbl() << "\n";
 	flow_result.close();
-/*
-	FILE * flow_result;
-
-	std::cout << flow_fileName << "\n";
-*/
-	//flow_result = fopen(flow_fileName.c_str(),"a");
-	//fprintf(flow_result,"%u ",r_flowSize);
-	//fprintf(flow_result,"%u %f",r_flowSize, r_ageOfFlow.dbl());
-	//fprintf(flow_result, "%s\n",ss.str().c_str());
-	//fprintf(flow_result, "\n");
-
-	//fclose(flow_result);	
 	
         incompleteMesgs.erase(inboundMesg->msgIdAtSender);
         delete inboundMesg;
@@ -2636,28 +2613,6 @@ HomaTransport::ReceiveScheduler::SchedSenders::getPrioForMesg(SchedState& st)
     int grantPrio;    
     InboundMessage* mesg = st.s -> incompleteMesgs[st.msgId]; 
     
-    /*
-    //Print out all PBS required elements 
-    if(mesg != NULL){ 
-	    std::cout<<"msgId: "<< st.msgId<<" Message Size: "<<mesg-> msgSize <<
-		 " message Left: "<<mesg -> bytesToReceive <<"\n"; 
-	    	    
-	    std::cout <<"msgIdAtSender: "<< mesg -> msgIdAtSender <<"\n"; 
-	    std::cout <<"Message bytes remaining: "<< mesg -> bytesToReceive <<"\n";
-	    std::cout << "Message bytes sent: " << mesg -> msgSize - mesg -> bytesToReceive << "\n";  	
-	    std::cout <<"Message Size: "<< mesg -> msgSize <<"\n"; 
-	    
-	    std::cout <<"Message Creation Time: "<< mesg -> msgCreationTime <<"\n";
-	    std::cout <<"First Packet Arrival Time: "<< mesg -> reqArrivalTime <<"\n"; 
-	    std::cout <<"Current Packet Time: "<< simTime() <<"\n";
-	   
-	   
-	    // Address
-	    std::cout <<"Sender Address: " << st.s -> getSenderAddr().str() <<"\n"; 
-	    std::cout <<"receiver Address: " << mesg -> destAddr.str() <<"\n"; 
-	    
-    }
-    */
     if (mesg == NULL || homaConfig->r_mode == "homa") {    
     	grantPrio =
         	st.sInd + homaConfig->allPrio - homaConfig->adaptiveSchedPrioLevels;
@@ -2671,7 +2626,7 @@ HomaTransport::ReceiveScheduler::SchedSenders::getPrioForMesg(SchedState& st)
     	// age of flow should be in nanoseconds
 	// use alpha = 2 for the first run
         uint32_t r_bytesSent = mesg -> msgSize - mesg -> bytesToReceive;	
-        simtime_t r_ageOfFlow = (simTime() - mesg -> msgCreationTime) * (0.000001);
+        simtime_t r_ageOfFlow = (simTime() - mesg -> msgCreationTime) * (0.001);
         //simtime_t r_ageOfFlow = (simTime() - mesg -> msgCreationTime) * (0.000001);
 	//std::cout<<"r_ageOfFlow: "<<r_ageOfFlow<<"\n"; 
 	
@@ -2685,7 +2640,7 @@ HomaTransport::ReceiveScheduler::SchedSenders::getPrioForMesg(SchedState& st)
 
     } else if (homaConfig->r_mode == "aware") {
         uint32_t r_bytesRemaining = mesg -> bytesToReceive;
-        simtime_t r_ageOfFlow = (simTime() - mesg -> msgCreationTime) * (0.000001);
+        simtime_t r_ageOfFlow = (simTime() - mesg -> msgCreationTime) * (0.001);
 	double rawPrio = log10(r_ageOfFlow.dbl()) / (homaConfig->r_alpha * log10(r_bytesRemaining));
 	grantPrio= getGrantPrioFromRawPrio(homaConfig->r_mode, rawPrio);
 	return grantPrio;
