@@ -8,5 +8,7 @@
     - make
 4. build the homatransport 
     - export LC_ALL="en_US.UTF-8"
+    - copy the makefile to homatransport:  
+ https://raw.githubusercontent.com/Stanley131/Research_PBS_HOMA/master/OMNet%2B%2B_HOMA/RpcTransportDesign/OMNeT%2B%2BSimulation/homatransport/Makefile_old
     - build inet and homatransport using: make makefiles; make mode=RELEASE
     
