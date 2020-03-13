@@ -4,3 +4,12 @@
 * W3: Google_AllRPC
 * W4: Facebook_HadoopDist_All
 * W5: DCTCP_MsgSizeDist
+
+WorkloadKeyValue
+WorkloadFabricatedHeavyHead
+WorkloadGoogleSearchRpc WorkloadFabricatedHeavyMiddle
+WorkloadGoogleAllRpc
+WorkloadWebServer
+WorkloadHadoop
+WorkloadCacheFollower
+WorkloadDCTCP
